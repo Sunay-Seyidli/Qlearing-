@@ -10,6 +10,7 @@
   const SAVE_TIMEOUT_MS = 10000;
   const TOTAL_STATES_ESTIMATE = 5500;
   const TRAIN_GAMES = 100000;
+  const PLAY_EPSILON = 0.03; // oyun sırasında sabit keşif: eğitilmiş AI güçlü oynar
 
   const $ = id => document.getElementById(id);
   const el = {
@@ -163,7 +164,7 @@
     const known = agent.knownStates();
     el.known.textContent = known;
     el.bar.style.width = Math.min(100, (known / TOTAL_STATES_ESTIMATE) * 100) + "%";
-    el.epsilon.textContent = "%" + Math.round(agent.epsilon * 100);
+    el.epsilon.textContent = "%" + Math.round(PLAY_EPSILON * 100);
   }
 
   function setSideButtons() {
@@ -213,7 +214,7 @@
       busy = false;
       return;
     }
-    const a = agent.choose(ep.board, aiSide(), agent.epsilon);
+    const a = agent.choose(ep.board, aiSide(), PLAY_EPSILON);
     ep.applyMove(aiSide(), a);
     renderBoard();
     renderTurn();
@@ -266,7 +267,6 @@
       cls = "win";
     }
     agent.games++;
-    agent.epsilon = Math.max(0.02, agent.epsilon * 0.98);
 
     updateScore();
     renderStats();

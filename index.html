@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#0b1020">
+  <title>XOX — Q-Learning AI</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="title-wrap">
+        <h1 class="title">XOX</h1>
+        <span id="status-dot" class="status-dot" title="Veritabanı durumu"></span>
+      </div>
+      <button id="burger" class="burger" aria-label="Menüyü aç" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <div class="seg" role="group" aria-label="Senin işaretin">
+      <span>Sen:</span>
+      <button class="side-btn active" data-side="1" aria-pressed="true">X</button>
+      <button class="side-btn" data-side="2" aria-pressed="false">O</button>
+    </div>
+
+    <div class="scoreboard">
+      <div><span>Sen</span><strong id="player-score">0</strong></div>
+      <div><span>Berabere</span><strong id="draw-score">0</strong></div>
+      <div><span>AI</span><strong id="ai-score">0</strong></div>
+    </div>
+
+    <div class="main">
+      <div id="turn" class="turn"></div>
+      <div id="board" class="board" role="grid" aria-label="Oyun tahtası"></div>
+    </div>
+
+    <div id="result" class="result"></div>
+
+    <div class="actions">
+      <button id="new-game" class="primary">Yeni tur</button>
+    </div>
+  </div>
+
+  <div id="backdrop" class="drawer-backdrop"></div>
+
+  <aside id="drawer" class="drawer" aria-hidden="true" aria-label="Menü">
+    <div class="drawer-head">
+      <h2>Menü</h2>
+      <button id="close-drawer" class="icon-btn" aria-label="Menüyü kapat">✕</button>
+    </div>
+
+    <section class="panel">
+      <h3>AI'nin Zekâsı</h3>
+      <div class="stat-row"><span>Oynanan oyun</span><strong id="games">0</strong></div>
+      <div class="stat-row"><span>AI kazanma oranı</span><strong id="win-rate">-</strong></div>
+      <div class="stat-row"><span>Öğrenilen durum</span><strong id="known">0</strong></div>
+      <div class="stat-row"><span>Keşif oranı (ε)</span><strong id="epsilon">-</strong></div>
+      <div class="bar"><div id="learn-bar"></div></div>
+      <p class="hint">Öğrenilen durum sayısı, AI'nin ne kadar tahta gördüğünü gösterir. Tüm oyun ağacında yaklaşık 5.500 farklı durum vardır.</p>
+      <p class="hint">Veritabanı: <span id="sync-text">-</span></p>
+      <div class="btn-row">
+        <button id="train-btn" class="ghost">AI'yi 100.000 oyunla eğit</button>
+        <button id="reset-btn" class="ghost">Öğrenmeyi sıfırla</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h3>Hakkında</h3>
+      <p class="about">
+        XOX, klasik üç taşlı oyunun Q-Learning ile öğrenen bir yapay zekâya karşı oynandığı sürümüdür.
+        AI, kendi kendine oynayarak ön eğitim alır ve senin oyunlarından da öğrenmeye devam eder.
+      </p>
+      <p class="about">
+        <strong>Nasıl çalışıyor?</strong> AI her hamlede tahtayı kendi gözünden kodlar, hangi hamlenin
+        kazanmaya yaklaştırdığını Q-tablosundan okur. Oyun bitince ödül (kazanma +1, kaybetme −1) geriye yayılır.
+      </p>
+      <p class="about">
+        <strong>Teknolojiler:</strong> Saf JavaScript (Q-Learning), Vercel (barındırma ve serverless API),
+        MongoDB Atlas (kalıcı veri).
+      </p>
+      <p class="about"><strong>Kısayollar:</strong> 1–9 tuşları hücreleri seçer, Esc menüyü kapatır.</p>
+      <p class="about muted">Sürüm 1.0</p>
+    </section>
+  </aside>
+
+  <script src="js/xox.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

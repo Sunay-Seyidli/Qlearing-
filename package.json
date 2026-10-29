@@ -1,0 +1,12 @@
+{
+  "name": "xox-qlearning",
+  "version": "1.0.0",
+  "private": true,
+  "description": "XOX (Tic-Tac-Toe) — Q-Learning AI, MongoDB'de kalıcı öğrenme",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "mongodb": "^6.10.0"
+  }
+}
